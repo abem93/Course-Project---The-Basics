@@ -1,11 +1,12 @@
-import { EventEmitter, Injectable } from "@angular/core";
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
+import { Subject } from "rxjs";
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export class RecipeService{
-  recipeSelected = new EventEmitter<Recipe>();
+  recipeSelected = new Subject<Recipe>();
 
   private recipes: Recipe[] = [
     new Recipe('Tasty Schnitzel', 'A super Tasty Schnitzel that is just awesome!', 'https://stripedspatula.com/wp-content/uploads/2018/02/bolognese-sauce-instant-pot-1-500x500.jpg',[
@@ -25,7 +26,12 @@ export class RecipeService{
   getRecipes(){
     return this.recipes.slice();
   }
+  getRecipe(index:number){
+    return  this.recipes[index];
+  }
+  
   addIngredientsToShoppingList(ingredients: Ingredient[]){
     this.slService.addIngredients(ingredients);
   }
+
 }
