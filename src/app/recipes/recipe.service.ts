@@ -8,6 +8,7 @@ import { Injectable } from "@angular/core";
 export class RecipeService{
   recipeSelected = new Subject<Recipe>();
 
+
   private recipes: Recipe[] = [
     new Recipe('Tasty Schnitzel', 'A super Tasty Schnitzel that is just awesome!', 'https://stripedspatula.com/wp-content/uploads/2018/02/bolognese-sauce-instant-pot-1-500x500.jpg',[
       new Ingredient('Meat', 1),
@@ -19,9 +20,8 @@ export class RecipeService{
     ])
   ];
 
-  constructor(private slService: ShoppingListService){
 
-  }
+  constructor(private slService: ShoppingListService){}
 
   getRecipes(){
     return this.recipes.slice();
@@ -29,7 +29,6 @@ export class RecipeService{
   getRecipe(index:number){
     return  this.recipes[index];
   }
-  
   addIngredientsToShoppingList(ingredients: Ingredient[]){
     this.slService.addIngredients(ingredients);
   }
